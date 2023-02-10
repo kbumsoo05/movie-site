@@ -12,7 +12,11 @@ const App = () => {
     setToDos((prev) => [toDo, ...prev]);
     setToDo("");
   };
-  console.log(toDos);
+  const onClick = (event) => { 
+    console.log(event.nativeEvent.path);
+    event.nativeEvent.path[2].removeChild(event.nativeEvent.path[1]);
+  };
+  
   return (
     <div>
       <h1>To Do List ({toDos.length})</h1>
@@ -25,7 +29,7 @@ const App = () => {
       </form>
       <hr />
       <ul>
-        {toDos.map((item, index) => <li key={index}>{item}</li>)}
+        {toDos.map((item, index) => <li key={index}>{item} <button onClick={onClick}>X</button></li>)}
       </ul>
     </div>
   );
